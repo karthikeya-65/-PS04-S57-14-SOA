@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starlight Stays & Resorts | Luxury Hospitality Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #121826;
+            --bg-glass: rgba(18, 24, 38, 0.75);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --gold-gradient: linear-gradient(135deg, #d4af37 0%, #aa771c 100%);
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --accent-red: #ef4444;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --shadow-glow: 0 0 30px rgba(212, 175, 55, 0.15);
+            --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+            --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(59, 130, 246, 0.05) 0%, transparent 40%);
+        }
+
+        /* Glassmorphism Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 76px;
+            background: rgba(10, 14, 23, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-glass);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gold-gradient);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-glow);
+            font-size: 20px;
+        }
+
+        .brand-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: linear-gradient(90deg, #fff, var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-text span {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: var(--gold);
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--gold);
+        }
+
+        .auth-widget {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .user-badge {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-secondary);
+            padding: 6px 14px;
+            border-radius: 30px;
+            border: 1px solid var(--border-glass);
+            font-size: 13px;
+        }
+
+        .role-tag {
+            font-size: 10px;
+            padding: 2px 8px;
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--gold);
+            border-radius: 12px;
+            font-weight: 700;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 10px 22px;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-gold {
+            background: var(--gold-gradient);
+            color: #000;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-glass);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-danger {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--accent-red);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-danger:hover {
+            background: var(--accent-red);
+            color: #fff;
+        }
+
+        /* System Mesh Status Banner */
+        .system-banner {
+            margin-top: 76px;
+            background: rgba(18, 24, 38, 0.95);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 10px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+        }
+
+        .services-status {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .service-pill {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-secondary);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-green);
+            box-shadow: 0 0 8px var(--accent-green);
+        }
+
+        /* Main Container */
+        main {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        /* Hero & Search */
+        .hero {
+            text-align: center;
+            padding: 40px 0 50px;
+        }
+
+        .hero h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 46px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            background: linear-gradient(180deg, #ffffff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 17px;
+            max-width: 650px;
+            margin: 0 auto 36px;
+        }
+
+        /* Search Filter Box */
+        .search-box {
+            background: var(--bg-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-card);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) 160px;
+            gap: 16px;
+            align-items: flex-end;
+            margin-bottom: 50px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            text-align: left;
+        }
+
+        .input-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .input-group input, .input-group select {
+            background: rgba(10, 14, 23, 0.8);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-sm);
+            padding: 12px 14px;
+            color: var(--text-primary);
+            font-size: 14px;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Tabs */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .section-title h3 {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        /* Room Cards Grid */
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 28px;
+        }
+
+        .room-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .room-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.6);
+        }
+
+        .room-img-wrapper {
+            position: relative;
+            height: 220px;
+            background: #1e293b;
+            overflow: hidden;
+        }
+
+        .room-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .room-card:hover .room-img {
+            transform: scale(1.05);
+        }
+
+        .hotel-tag {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: rgba(10, 14, 23, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--gold-light);
+            border: 1px solid var(--border-glass);
+        }
+
+        .rating-tag {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: rgba(10, 14, 23, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #fbbf24;
+            border: 1px solid var(--border-glass);
+        }
+
+        .room-body {
+            padding: 22px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .room-title {
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .room-desc {
+            color: var(--text-secondary);
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+            flex: 1;
+        }
+
+        .amenities-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 20px;
+        }
+
+        .amenity-chip {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-glass);
+            border-radius: 6px;
+            padding: 3px 8px;
+            font-size: 11px;
+            color: var(--text-secondary);
+        }
+
+        .room-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-glass);
+        }
+
+        .price-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-amount {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-primary);
+        }
+
+        .price-label {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 520px;
+            padding: 32px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            position: relative;
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 24px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-btn:hover {
+            color: var(--text-primary);
+        }
+
+        /* Bookings Table / List */
+        .bookings-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .booking-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .booking-ref {
+            font-family: monospace;
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .booking-status {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .status-confirmed {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--accent-green);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .status-cancelled {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--accent-red);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        /* Alert Toasts */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-glass);
+            padding: 14px 22px;
+            border-radius: var(--radius-sm);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            display: none;
+            z-index: 2000;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .toast.success { border-color: var(--accent-green); color: var(--accent-green); }
+        .toast.error { border-color: var(--accent-red); color: var(--accent-red); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav { padding: 0 20px; }
+            .search-box { grid-template-columns: 1fr; }
+            .hero h2 { font-size: 32px; }
+            .rooms-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="brand" onclick="showRoomsTab()">
+            <div class="brand-icon">✨</div>
+            <div class="brand-text">
+                <h1>Starlight Stays</h1>
+                <span>Resorts & Suites</span>
+            </div>
+        </a>
+
+        <div class="nav-links">
+            <span class="nav-link active" id="nav-rooms" onclick="showRoomsTab()">Explore Resorts</span>
+            <span class="nav-link" id="nav-bookings" onclick="showBookingsTab()">My Bookings</span>
+            <a href="http://localhost:8761" target="_blank" class="nav-link">Eureka Registry ↗</a>
+        </div>
+
+        <div class="auth-widget">
+            <div class="user-badge" id="user-badge">
+                <span id="badge-username">Guest</span>
+                <span class="role-tag" id="badge-role">ROLE_GUEST</span>
+                <button class="btn btn-outline" style="padding: 4px 10px; font-size: 11px;" onclick="logout()">Logout</button>
+            </div>
+            <button class="btn btn-gold" id="login-btn" onclick="openAuthModal()">Sign In</button>
+        </div>
+    </nav>
+
+    <!-- System Status Bar -->
+    <div class="system-banner">
+        <div class="services-status">
+            <span style="font-weight: 700; color: #fff;">Spring Boot Services:</span>
+            <div class="service-pill"><span class="status-dot"></span> Eureka (:8761)</div>
+            <div class="service-pill"><span class="status-dot"></span> Gateway (:8080)</div>
+            <div class="service-pill"><span class="status-dot"></span> User Service (:8081)</div>
+            <div class="service-pill"><span class="status-dot"></span> Room Service (:8082)</div>
+            <div class="service-pill"><span class="status-dot"></span> Booking Service (:8083)</div>
+        </div>
+        <div style="color: var(--text-muted);">
+            Spring Boot 3.3.4 &amp; Java 17 LTS
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <main>
+        <!-- Hero Section -->
+        <div class="hero">
+            <h2>Luxury Sanctuary &amp; World-Class Escapes</h2>
+            <p>Experience pristine private villas, mountain ski chalets, and tropical oceanfront penthouses managed by Starlight Stays microservices.</p>
+        </div>
+
+        <!-- Search & Filter Bar -->
+        <div class="search-box">
+            <div class="input-group">
+                <label>Destination / City</label>
+                <input type="text" id="search-city" placeholder="e.g. Malibu, Aspen, Honolulu">
+            </div>
+            <div class="input-group">
+                <label>Guests</label>
+                <select id="search-guests">
+                    <option value="">Any Guests</option>
+                    <option value="1">1 Guest</option>
+                    <option value="2" selected>2 Guests</option>
+                    <option value="4">4 Guests</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label>Max Price ($/night)</label>
+                <input type="number" id="search-max-price" placeholder="e.g. 800" value="1000">
+            </div>
+            <div class="input-group">
+                <label>Rating</label>
+                <select id="search-rating">
+                    <option value="">Any Stars</option>
+                    <option value="5" selected>5 Stars</option>
+                    <option value="4">4+ Stars</option>
+                </select>
+            </div>
+            <button class="btn btn-gold" style="height: 46px;" onclick="loadRooms()">
+                🔍 Filter
+            </button>
+        </div>
+
+        <!-- Rooms Section -->
+        <section id="rooms-section">
+            <div class="section-header">
+                <div class="section-title">
+                    <h3>Featured Luxury Suites</h3>
+                    <p>Live inventory synchronized in real-time across microservices</p>
+                </div>
+            </div>
+
+            <div class="rooms-grid" id="rooms-container">
+                <!-- Dynamically populated room cards -->
+                <div style="text-align: center; grid-column: 1/-1; color: var(--text-muted); padding: 40px;">
+                    Loading luxury inventory from Room Service...
+                </div>
+            </div>
+        </section>
+
+        <!-- My Bookings Section -->
+        <section id="bookings-section" style="display: none;">
+            <div class="section-header">
+                <div class="section-title">
+                    <h3>My Reservations</h3>
+                    <p>Real-time booking confirmations and cancellation management</p>
+                </div>
+                <button class="btn btn-outline" onclick="loadMyBookings()">Refresh</button>
+            </div>
+
+            <div class="bookings-list" id="bookings-container">
+                <!-- Dynamically populated bookings -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Booking Modal -->
+    <div class="modal-overlay" id="booking-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Book Reservation</h4>
+                <button class="close-btn" onclick="closeModal('booking-modal')">&times;</button>
+            </div>
+            <div id="booking-modal-body">
+                <div style="margin-bottom: 16px;">
+                    <h5 id="modal-room-name" style="font-size: 17px; margin-bottom: 4px;"></h5>
+                    <p id="modal-hotel-name" style="color: var(--gold); font-size: 13px;"></p>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px;">
+                    <div class="input-group">
+                        <label>Check-In Date</label>
+                        <input type="date" id="book-checkin">
+                    </div>
+                    <div class="input-group">
+                        <label>Check-Out Date</label>
+                        <input type="date" id="book-checkout">
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px;">
+                    <div class="input-group">
+                        <label>Rooms</label>
+                        <input type="number" id="book-num-rooms" value="1" min="1" max="5">
+                    </div>
+                    <div class="input-group">
+                        <label>Total Guests</label>
+                        <input type="number" id="book-num-guests" value="2" min="1">
+                    </div>
+                </div>
+
+                <div class="input-group" style="margin-bottom: 20px;">
+                    <label>Special Requests</label>
+                    <input type="text" id="book-requests" placeholder="e.g. Ocean view floor, late check-in">
+                </div>
+
+                <div style="background: var(--bg-primary); border-radius: var(--radius-sm); padding: 14px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 13px; color: var(--text-secondary);">Estimated Total:</span>
+                    <span id="modal-total-price" style="font-size: 18px; font-weight: 800; color: var(--gold-light);">$0.00</span>
+                </div>
+
+                <div style="display: flex; gap: 10px;">
+                    <button class="btn btn-outline" style="flex: 1;" onclick="checkRealTimeAvailability()">Check Availability</button>
+                    <button class="btn btn-gold" style="flex: 1;" onclick="submitBooking()">Confirm Booking</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div class="modal-overlay" id="auth-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="auth-title">Sign In to Starlight Stays</h4>
+                <button class="close-btn" onclick="closeModal('auth-modal')">&times;</button>
+            </div>
+            <div>
+                <div class="input-group" style="margin-bottom: 14px;">
+                    <label>Username</label>
+                    <input type="text" id="auth-username" placeholder="Username" value="john_doe">
+                </div>
+                <div class="input-group" style="margin-bottom: 20px;">
+                    <label>Password</label>
+                    <input type="password" id="auth-password" placeholder="Password" value="Guest123!">
+                </div>
+
+                <button class="btn btn-gold" style="width: 100%; margin-bottom: 16px;" onclick="performLogin()">Sign In</button>
+
+                <div style="text-align: center; font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
+                    Or quick-fill demo credentials:
+                </div>
+                <div style="display: flex; gap: 8px; justify-content: center;">
+                    <button class="btn btn-outline" style="font-size: 11px; padding: 6px 12px;" onclick="fillCreds('john_doe', 'Guest123!')">Demo Guest</button>
+                    <button class="btn btn-outline" style="font-size: 11px; padding: 6px 12px;" onclick="fillCreds('admin', 'Admin123!')">Administrator</button>
+                    <button class="btn btn-outline" style="font-size: 11px; padding: 6px 12px;" onclick="fillCreds('manager', 'Manager123!')">Hotel Manager</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // State
+        let currentUser = null;
+        let jwtToken = localStorage.getItem('starlight_jwt') || null;
+        let selectedRoom = null;
+
+        // Auto date defaults: Tomorrow to +4 days
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const dayAfter = new Date(today);
+        dayAfter.setDate(dayAfter.getDate() + 4);
+
+        document.getElementById('book-checkin').value = tomorrow.toISOString().split('T')[0];
+        document.getElementById('book-checkout').value = dayAfter.toISOString().split('T')[0];
+
+        // Init
+        window.addEventListener('DOMContentLoaded', () => {
+            initAuth();
+            loadRooms();
+        });
+
+        function showToast(msg, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.className = `toast ${type}`;
+            toast.style.display = 'block';
+            setTimeout(() => { toast.style.display = 'none'; }, 4000);
+        }
+
+        function initAuth() {
+            if (jwtToken) {
+                try {
+                    const payload = JSON.parse(atob(jwtToken.split('.')[1]));
+                    currentUser = {
+                        id: payload.userId,
+                        username: payload.sub,
+                        role: payload.role
+                    };
+                    updateAuthUI();
+                } catch (e) {
+                    logout();
+                }
+            }
+        }
+
+        function updateAuthUI() {
+            const badge = document.getElementById('user-badge');
+            const loginBtn = document.getElementById('login-btn');
+            if (currentUser) {
+                badge.style.display = 'flex';
+                loginBtn.style.display = 'none';
+                document.getElementById('badge-username').textContent = currentUser.username;
+                document.getElementById('badge-role').textContent = currentUser.role;
+            } else {
+                badge.style.display = 'none';
+                loginBtn.style.display = 'inline-flex';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('starlight_jwt');
+            currentUser = null;
+            jwtToken = null;
+            updateAuthUI();
+            showToast('Logged out successfully');
+        }
+
+        function openAuthModal() {
+            document.getElementById('auth-modal').style.display = 'flex';
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+
+        function fillCreds(u, p) {
+            document.getElementById('auth-username').value = u;
+            document.getElementById('auth-password').value = p;
+        }
+
+        async function performLogin() {
+            const username = document.getElementById('auth-username').value.trim();
+            const password = document.getElementById('auth-password').value.trim();
+
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    jwtToken = data.data.token;
+                    localStorage.setItem('starlight_jwt', jwtToken);
+                    currentUser = {
+                        id: data.data.id,
+                        username: data.data.username,
+                        role: data.data.role
+                    };
+                    updateAuthUI();
+                    closeModal('auth-modal');
+                    showToast(`Welcome back, ${currentUser.username}!`);
+                } else {
+                    showToast(data.message || 'Login failed', 'error');
+                }
+            } catch (err) {
+                showToast('Authentication service unavailable: ' + err.message, 'error');
+            }
+        }
+
+        // Room loading and rendering
+        async function loadRooms() {
+            const container = document.getElementById('rooms-container');
+            const city = document.getElementById('search-city').value.trim();
+            const guests = document.getElementById('search-guests').value;
+            const maxPrice = document.getElementById('search-max-price').value;
+            const starRating = document.getElementById('search-rating').value;
+
+            let url = '/api/rooms/search?';
+            const params = new URLSearchParams();
+            if (city) params.append('city', city);
+            if (guests) params.append('guests', guests);
+            if (maxPrice) params.append('maxPrice', maxPrice);
+            if (starRating) params.append('starRating', starRating);
+            url += params.toString();
+
+            try {
+                const res = await fetch(url);
+                const json = await res.json();
+                const list = json.data || [];
+
+                if (list.length === 0) {
+                    container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-muted);">
+                        No suites found matching your filter criteria. Try adjusting destination or price.
+                    </div>`;
+                    return;
+                }
+
+                const images = [
+                    'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1566665797739-1674de7a421a?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1590490360182-c33d57733427?auto=format&fit=crop&w=800&q=80'
+                ];
+
+                container.innerHTML = list.map((item, idx) => {
+                    const amenities = item.amenities ? item.amenities.split(',') : [];
+                    const img = images[idx % images.length];
+
+                    return `
+                    <div class="room-card">
+                        <div class="room-img-wrapper">
+                            <img src="${img}" alt="${item.roomTypeName}" class="room-img">
+                            <div class="hotel-tag">🏨 ${item.hotelName} • ${item.hotelCity}</div>
+                            <div class="rating-tag">★ ${item.starRating}.0</div>
+                        </div>
+                        <div class="room-body">
+                            <h4 class="room-title">${item.roomTypeName}</h4>
+                            <p class="room-desc">${item.description || 'Exclusive luxury accommodations with world-class hospitality.'}</p>
+                            <div class="amenities-list">
+                                ${amenities.map(a => `<span class="amenity-chip">✓ ${a.trim()}</span>`).join('')}
+                            </div>
+                            <div class="room-footer">
+                                <div class="price-box">
+                                    <span class="price-amount">$${item.basePricePerNight}</span>
+                                    <span class="price-label">per night • ${item.totalInventory} units available</span>
+                                </div>
+                                <button class="btn btn-gold" onclick='openBookingModal(${JSON.stringify(item)})'>Book Now</button>
+                            </div>
+                        </div>
+                    </div>`;
+                }).join('');
+            } catch (err) {
+                container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; color: var(--accent-red); padding: 40px;">
+                    Failed to reach Room Service via Gateway: ${err.message}
+                </div>`;
+            }
+        }
+
+        function openBookingModal(room) {
+            if (!currentUser) {
+                showToast('Please sign in first to make a reservation', 'error');
+                openAuthModal();
+                return;
+            }
+            selectedRoom = room;
+            document.getElementById('modal-room-name').textContent = room.roomTypeName;
+            document.getElementById('modal-hotel-name').textContent = `📍 ${room.hotelName} (${room.hotelCity}, ${room.hotelCountry})`;
+            calculatePricePreview();
+            document.getElementById('booking-modal').style.display = 'flex';
+        }
+
+        function calculatePricePreview() {
+            if (!selectedRoom) return;
+            const inDate = new Date(document.getElementById('book-checkin').value);
+            const outDate = new Date(document.getElementById('book-checkout').value);
+            const numRooms = parseInt(document.getElementById('book-num-rooms').value) || 1;
+
+            if (outDate > inDate) {
+                const diffTime = Math.abs(outDate - inDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                const total = diffDays * selectedRoom.basePricePerNight * numRooms;
+                document.getElementById('modal-total-price').textContent = `$${total.toFixed(2)} (${diffDays} nights)`;
+            } else {
+                document.getElementById('modal-total-price').textContent = '$0.00';
+            }
+        }
+
+        document.getElementById('book-checkin').addEventListener('change', calculatePricePreview);
+        document.getElementById('book-checkout').addEventListener('change', calculatePricePreview);
+        document.getElementById('book-num-rooms').addEventListener('input', calculatePricePreview);
+
+        async function checkRealTimeAvailability() {
+            if (!selectedRoom) return;
+            const checkInDate = document.getElementById('book-checkin').value;
+            const checkOutDate = document.getElementById('book-checkout').value;
+
+            try {
+                const res = await fetch('/api/bookings/check-availability', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${jwtToken}`
+                    },
+                    body: JSON.stringify({
+                        roomTypeId: selectedRoom.roomTypeId,
+                        checkInDate,
+                        checkOutDate
+                    })
+                });
+                const data = await res.json();
+                if (data.success && data.data.isAvailable) {
+                    showToast(`✓ Available! ${data.data.availableRooms} of ${data.data.totalInventory} rooms free for selected dates.`);
+                } else {
+                    showToast('Unavailable: Selected category is fully booked for these dates.', 'error');
+                }
+            } catch (err) {
+                showToast('Availability check failed: ' + err.message, 'error');
+            }
+        }
+
+        async function submitBooking() {
+            if (!selectedRoom || !currentUser) return;
+            const checkInDate = document.getElementById('book-checkin').value;
+            const checkOutDate = document.getElementById('book-checkout').value;
+            const numRooms = parseInt(document.getElementById('book-num-rooms').value);
+            const numGuests = parseInt(document.getElementById('book-num-guests').value);
+            const specialRequests = document.getElementById('book-requests').value;
+
+            try {
+                const res = await fetch('/api/bookings', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${jwtToken}`
+                    },
+                    body: JSON.stringify({
+                        hotelId: selectedRoom.hotelId,
+                        roomTypeId: selectedRoom.roomTypeId,
+                        checkInDate,
+                        checkOutDate,
+                        numRooms,
+                        numGuests,
+                        specialRequests
+                    })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    closeModal('booking-modal');
+                    showToast(`Reservation confirmed! Ref: ${data.data.bookingReference}`);
+                    showBookingsTab();
+                } else {
+                    showToast(data.message || 'Booking failed', 'error');
+                }
+            } catch (err) {
+                showToast('Booking failed: ' + err.message, 'error');
+            }
+        }
+
+        // Tabs
+        function showRoomsTab() {
+            document.getElementById('rooms-section').style.display = 'block';
+            document.getElementById('bookings-section').style.display = 'none';
+            document.getElementById('nav-rooms').classList.add('active');
+            document.getElementById('nav-bookings').classList.remove('active');
+        }
+
+        function showBookingsTab() {
+            if (!currentUser) {
+                showToast('Please sign in to view your bookings', 'error');
+                openAuthModal();
+                return;
+            }
+            document.getElementById('rooms-section').style.display = 'none';
+            document.getElementById('bookings-section').style.display = 'block';
+            document.getElementById('nav-rooms').classList.remove('active');
+            document.getElementById('nav-bookings').classList.add('active');
+            loadMyBookings();
+        }
+
+        async function loadMyBookings() {
+            const container = document.getElementById('bookings-container');
+            if (!jwtToken) return;
+
+            try {
+                const res = await fetch('/api/bookings/my-bookings', {
+                    headers: { 'Authorization': `Bearer ${jwtToken}` }
+                });
+                const data = await res.json();
+                const list = data.data || [];
+
+                if (list.length === 0) {
+                    container.innerHTML = `<div style="text-align: center; padding: 40px; color: var(--text-muted);">
+                        No reservations found. Explore our luxury resorts and book your stay!
+                    </div>`;
+                    return;
+                }
+
+                container.innerHTML = list.map(b => {
+                    const isCancelled = b.status === 'CANCELLED';
+                    return `
+                    <div class="booking-item">
+                        <div>
+                            <div class="booking-ref">${b.bookingReference}</div>
+                            <div style="font-weight: 700; font-size: 16px; margin: 4px 0;">${b.roomTypeName || 'Suite Category #' + b.roomTypeId}</div>
+                            <div style="color: var(--text-secondary); font-size: 13px;">
+                                📅 ${b.checkInDate} to ${b.checkOutDate} • ${b.numRooms} room(s) • ${b.numGuests} guests
+                            </div>
+                            ${b.specialRequests ? `<div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Note: "${b.specialRequests}"</div>` : ''}
+                        </div>
+                        <div style="text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
+                            <div style="font-size: 20px; font-weight: 800; color: var(--text-primary);">$${b.totalAmount}</div>
+                            <span class="booking-status ${isCancelled ? 'status-cancelled' : 'status-confirmed'}">${b.status}</span>
+                            ${!isCancelled ? `<button class="btn btn-danger" style="font-size: 12px; padding: 6px 14px;" onclick="cancelBooking(${b.id})">Cancel Stay</button>` : ''}
+                        </div>
+                    </div>`;
+                }).join('');
+            } catch (err) {
+                container.innerHTML = `<div style="text-align: center; color: var(--accent-red); padding: 40px;">
+                    Failed to fetch reservations: ${err.message}
+                </div>`;
+            }
+        }
+
+        async function cancelBooking(id) {
+            const reason = prompt("Please enter a cancellation reason:", "Schedule change");
+            if (!reason) return;
+
+            try {
+                const res = await fetch(`/api/bookings/${id}/cancel`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${jwtToken}`
+                    },
+                    body: JSON.stringify({ cancellationReason: reason })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    showToast('Reservation successfully cancelled and dates freed');
+                    loadMyBookings();
+                } else {
+                    showToast(data.message || 'Cancellation failed', 'error');
+                }
+            } catch (err) {
+                showToast('Failed to cancel booking: ' + err.message, 'error');
+            }
+        }
+    </script>
+</body>
+</html>
