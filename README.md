@@ -12,7 +12,7 @@ graph TD
     
     subgraph Service Mesh
         Eureka["Eureka Discovery Server (:8761)<br/>Netflix Eureka Registry"]
-        Gateway["API Gateway (:8080)<br/>Spring Cloud Gateway + Centralized JWT Filter"]
+        Gateway["API Gateway (:8088)<br/>Spring Cloud Gateway + Centralized JWT Filter"]
     end
     
     subgraph Microservices
@@ -50,7 +50,7 @@ graph TD
 | Service | Port | Description | Interactive UI & Documentation |
 | :--- | :---: | :--- | :--- |
 | **Eureka Server** | `8761` | Service Registry & Discovery | [http://localhost:8761](http://localhost:8761) |
-| **API Gateway** | `8080` | Central Reverse Proxy & JWT Auth Filter | **Embedded Web App**: [http://localhost:8080](http://localhost:8080) |
+| **API Gateway** | `8088` | Central Reverse Proxy & JWT Auth Filter | **Embedded Web App**: [http://localhost:8088](http://localhost:8088) |
 | **User Service** | `8081` | Authentication (JWT), User Profiles & Roles | [Swagger UI](http://localhost:8081/swagger-ui.html) |
 | **Room Service** | `8082` | Hotels, Room Categories, Inventory & Search | [Swagger UI](http://localhost:8082/swagger-ui.html) |
 | **Booking Service** | `8083` | Real-time Availability & Reservation Lifecycle | [Swagger UI](http://localhost:8083/swagger-ui.html) |
@@ -80,7 +80,7 @@ On Spring Boot startup, `DataInitializer` components automatically seed the in-m
 ## 3. Key Design Patterns & Business Logic
 
 ### Centralized JWT Verification & Header Propagation
-* Clients send `Authorization: Bearer <token>` to the **API Gateway** (`:8080`).
+* Clients send `Authorization: Bearer <token>` to the **API Gateway** (`:8088`).
 * Gateway's `AuthenticationFilter` validates the cryptographic signature and token expiration.
 * Gateway injects downstream identity headers:
   * `X-User-Id`
@@ -137,11 +137,11 @@ Or run individual services:
 
 ## 6. API Reference & Test Walkthrough
 
-All requests can be routed directly through the **API Gateway at `http://localhost:8080`**.
+All requests can be routed directly through the **API Gateway at `http://localhost:8088`**.
 
 ### Step 1: Register a New Guest
 ```bash
-curl -X POST http://localhost:8080/api/auth/register \
+curl -X POST http://localhost:8088/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "username": "alexguest",
@@ -156,7 +156,7 @@ curl -X POST http://localhost:8080/api/auth/register \
 
 ### Step 2: Login and Obtain JWT Token
 ```bash
-curl -X POST http://localhost:8080/api/auth/login \
+curl -X POST http://localhost:8088/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "username": "alexguest",
@@ -167,13 +167,13 @@ curl -X POST http://localhost:8080/api/auth/login \
 
 ### Step 3: Fetch Current User Profile
 ```bash
-curl -X GET http://localhost:8080/api/users/me \
+curl -X GET http://localhost:8088/api/users/me \
   -H "Authorization: Bearer <TOKEN>"
 ```
 
 ### Step 4: Register a Hotel (Manager / Admin)
 ```bash
-curl -X POST http://localhost:8080/api/hotels \
+curl -X POST http://localhost:8088/api/hotels \
   -H "Authorization: Bearer <TOKEN>" \
   -H "Content-Type: application/json" \
   -d '{
@@ -190,7 +190,7 @@ curl -X POST http://localhost:8080/api/hotels \
 
 ### Step 5: Add a Room Category with Inventory
 ```bash
-curl -X POST http://localhost:8080/api/room-types \
+curl -X POST http://localhost:8088/api/room-types \
   -H "Authorization: Bearer <TOKEN>" \
   -H "Content-Type: application/json" \
   -d '{
@@ -206,13 +206,13 @@ curl -X POST http://localhost:8080/api/room-types \
 
 ### Step 6: Search Rooms (Multi-Criteria Filter)
 ```bash
-curl -X GET "http://localhost:8080/api/rooms/search?city=Honolulu&minPrice=200&maxPrice=600&guests=2&starRating=4" \
+curl -X GET "http://localhost:8088/api/rooms/search?city=Honolulu&minPrice=200&maxPrice=600&guests=2&starRating=4" \
   -H "Authorization: Bearer <TOKEN>"
 ```
 
 ### Step 7: Check Real-Time Room Availability
 ```bash
-curl -X POST http://localhost:8080/api/bookings/check-availability \
+curl -X POST http://localhost:8088/api/bookings/check-availability \
   -H "Authorization: Bearer <TOKEN>" \
   -H "Content-Type: application/json" \
   -d '{
@@ -224,7 +224,7 @@ curl -X POST http://localhost:8080/api/bookings/check-availability \
 
 ### Step 8: Create a Hotel Reservation
 ```bash
-curl -X POST http://localhost:8080/api/bookings \
+curl -X POST http://localhost:8088/api/bookings \
   -H "Authorization: Bearer <TOKEN>" \
   -H "Content-Type: application/json" \
   -d '{
@@ -240,13 +240,13 @@ curl -X POST http://localhost:8080/api/bookings \
 
 ### Step 9: View My Bookings
 ```bash
-curl -X GET http://localhost:8080/api/bookings/my-bookings \
+curl -X GET http://localhost:8088/api/bookings/my-bookings \
   -H "Authorization: Bearer <TOKEN>"
 ```
 
 ### Step 10: Cancel a Reservation
 ```bash
-curl -X POST http://localhost:8080/api/bookings/1/cancel \
+curl -X POST http://localhost:8088/api/bookings/1/cancel \
   -H "Authorization: Bearer <TOKEN>" \
   -H "Content-Type: application/json" \
   -d '{

@@ -1,5 +1,6 @@
 server:
-  port: 8080
+  port: ${SERVER_PORT:8088}
+
 
 spring:
   application:
@@ -11,6 +12,11 @@ spring:
           enabled: true
           lower-case-service-id: true
       routes:
+        - id: root-to-index
+          uri: forward:/index.html
+          predicates:
+            - Path=/
+
         - id: user-service-auth
           uri: lb://USER-SERVICE
           predicates:

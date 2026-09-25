@@ -1,5 +1,5 @@
 @echo off
 title Starlight Stays - Eureka Server (:8761)
-cd /d "%~dp0"
-call mvnw.bat -pl eureka-server spring-boot:run
+for /f "delims=" %%I in ("%~dp0eureka-server") do cd /d "%%~sI"
+call ..\mvnw.bat spring-boot:run
 pause
